@@ -21,22 +21,22 @@ type logger struct {
 	level LoggeLevel
 }
 
-func (log logger) Debug(s string) {
+func (log *logger) Debug(s string) {
 	if log.level >= DEBUG {
 		printInfo(s)
 	}
 }
-func (log logger) Info(s string) {
+func (log *logger) Info(s string) {
 	if log.level >= Info {
 		printInfo(s)
 	}
 }
-func (log logger) Warning(s string) {
+func (log *logger) Warning(s string) {
 	if log.level >= Warning {
 		printInfo(s)
 	}
 }
-func (log logger) Error(s string) {
+func (log *logger) Error(s string) {
 	if log.level >= Error {
 		printInfo(s)
 	}
@@ -62,9 +62,25 @@ func printInfo(s string) {
 	fmt.Printf("[%s]:[%s:%s:%d]:%s\n", time, funcName, fileName, line, s)
 }
 
-func Newlogger(level LoggeLevel) logger {
-	return logger{
+func Newlogger(level LoggeLevel) *logger {
+	return &logger{
 		level,
+	}
+}
+
+type FileLogger struct {
+	level       LoggeLevel
+	filePath    string
+	fileName    string
+	maxFileSzie int64
+}
+
+func newFileLoger(level LoggeLevel, filePath, fileName string, maxFileSize int64) *FileLogger {
+	return &FileLogger	{
+		level,
+		filePath,
+		fileName,
+		maxFileSize,
 	}
 }
 
