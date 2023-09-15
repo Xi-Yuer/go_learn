@@ -13,6 +13,7 @@ func assign(n interface{}) {
 	// 	fmt.Println(val)
 	// }
 
+	// 只有接口类型才可以使用类型选择 n.(type) 其中 n 是一个接口类型（interface）  (type) 为固定关键字写法
 	switch t := n.(type) {
 	case int:
 		fmt.Println("数字", t)
