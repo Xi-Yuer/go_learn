@@ -46,7 +46,7 @@ func main() {
 	// m := make(chan int, 10) // 带缓冲区的通道初始化
 	// 通道的操作
 	// 发送 chan <- 1  将值发送给通道
-	// 接受 ret := chan 从通道获取值
+	// 接受 ret := <-chan 从通道获取值
 	// 关闭 close()
 	nobufChannel()
 	hasBufChannel()
