@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"sync"
 )
 
@@ -10,21 +11,14 @@ var wg sync.WaitGroup
 
 func main() {
 	m := sync.Map{}
-	go func() {
-		defer wg.Done()
+	for i := 0; i < 20; i++ {
 		wg.Add(1)
-		for i := 0; i < 10; i++ {
-			m.Store("A", i)
-		}
-	}()
-	go func() {
-		defer wg.Done()
-		wg.Add(1)
-		for i := 0; i < 10; i++ {
-			m.Store("B", i)
-		}
-	}()
-
+		go func(n int) {
+			key := strconv.Itoa(n)
+			m.Store(key, n)
+			wg.Done()
+		}(i)
+	}
 	wg.Wait()
 
 	fmt.Println(m)

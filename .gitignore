@@ -1,3 +1,6 @@
 /go
 /pkg
 /.DS_Store
+src/.DS_Store
+src/github.com/.DS_Store
+src/github.com/XiYuer/.DS_Store
